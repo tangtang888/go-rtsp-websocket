@@ -1,0 +1,10 @@
+{
+  "server": {
+    "http_port": ":8888"
+  },
+  "streams": {
+    "demo1": {
+      "url": "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
+    }
+  }
+}
