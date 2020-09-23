@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io"
 	"log"
 	"os"
 	"os/signal"
@@ -8,6 +9,14 @@ import (
 )
 
 func main() {
+	logFile, err := os.OpenFile("output.log", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer logFile.Close()
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
+
 	go serveHTTP()
 	go serveStreams()
 	sigs := make(chan os.Signal, 1)

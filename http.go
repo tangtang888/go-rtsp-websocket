@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-rtsp-websocket/middleware"
 	"log"
 	"net/http"
 	"sort"
@@ -13,6 +14,7 @@ import (
 
 func serveHTTP() {
 	router := gin.Default()
+	router.Use(middleware.LoggerToFile())
 	router.LoadHTMLGlob("web/templates/*")
 	router.GET("/", func(c *gin.Context) {
 		fi, all := Config.list()
